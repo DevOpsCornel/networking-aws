@@ -1,0 +1,14 @@
+
+# This is the command for creating the VPC in AWS after you must have gain access into the AWS account
+VPC_ID=$(aws ec2 create-vpc --cidr-block 10.10.0.0/16 \
+cmdsubst> --tag-specifications 'ResourceType=vpc, Tags=[{Key=Name,Value=AwsCornelius}]' \
+cmdsubst> --output text --query Vpc.VpcId)
+
+
+#This command below shows how you can see what you have created
+
+aws ec2 describe-vpcs --vpc-ids $VPC_ID
+
+# delete the vpc you just created, enter the command below
+
+aws ec2 delete-vpc --vpc-id $VPC_ID
